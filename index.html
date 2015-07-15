@@ -181,12 +181,19 @@
                 text-align:center;
             }
 
+            
+            <!--logo-->
+            #logo { position: absolute; top: 10px; left: 10px; z-index: 99; }
         </style>
 
 
         <div id='map'></div>
         <button onclick='zoomToWorld();' id='button'>Global View</button>
         <button onclick='zoomToHQ();' id='button'>&#9733 Zoom to HQ</button>
+        <img src="./images/logo_appnexus.png" style="position:absolute;top: 6px;right: -6px;width: 175px;">
+        <div id="logo">
+        <h3>testing</h3>
+        </div>
         <!--<div id='marker-list'><ul></ul></div>-->
         <script>
 
@@ -221,8 +228,13 @@
                     }
                 });
             });
-
-
+            
+            
+            L.control.command = function (options) {
+                return new L.Control.Command(options);
+            };
+            
+            
             function zoomToWorld() {
                 map.setView([15,-10], 2);
             }
