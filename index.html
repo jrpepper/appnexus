@@ -218,6 +218,13 @@
                 map.panTo(e.layer.getLatLng());
             });
 
+            map.featureLayer.on('mouseover', function(e) {
+                e.layer.openPopup();
+            });
+
+            map.featureLayer.on('mouseout', function(e) {
+                e.layer.closePopup();
+            });
 
             map.featureLayer.on('ready', function(e) {
                 map.featureLayer.eachLayer(function(marker) {
