@@ -54,7 +54,7 @@
                 background: #FE8700;
                 margin-left: 15px;
             }
-            
+
             #button:hover, #button-HQ:hover {
                 background-color:#ffdcb7;
                 cursor: pointer;
@@ -78,6 +78,116 @@
                 background-image: url("./images/icons-000000@2x.png");
             }
 
+            <!-- popups -->
+            .popup .cycle a.prev, .popup .cycle a.next {
+                font-weight: 600;
+                font-size:14px;
+            }
+
+            .popup {
+                text-align:center;
+            }
+
+            .leaflet-popup  .leaflet-zoom-animated {
+                width: 200px;
+            }
+
+            .popup .slideshow .image        { display:none; }
+            .popup .slideshow .image.active { display:block; }
+            .popup .slideshow img {
+                width:100%;
+            }
+            .popup .slideshow .caption {
+                background:#eee;
+                padding:10px;
+            }
+            .popup .cycle {
+                padding:10px 0 20px;
+            }
+            .popup .cycle a.prev { float:left; }
+            .popup .cycle a.next { float:right; }
+
+            .leaflet-popup-content p {
+                margin-top: 5px;
+                padding:10px;
+                font-size: 13px;
+                padding-bottom: 0px;}
+
+            .leaflet-popup-content{
+                width:200px !important;
+            }
+
+            .leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
+                opacity: 0.8 !important;
+            }
+
+            .leaflet-popup-content-wrapper {
+                border-radius: 0px;
+            }
+
+            .clearfix {
+                display: block;
+            }
+
+            .clearfix:after {
+                content: '';
+                display: block;
+                height: 0;
+                clear: both;
+                visibility: hidden;
+            }
+
+            .popup .button.dark {
+                color: #fff;
+                border-radius: 0px;
+            }
+
+            .view-listing.button {
+                color: #fff;
+                background: #56B881;
+                width: 94%;
+            }
+
+            .button {
+                background-color: #3887be;
+                text-align: center;
+                color: #fff;
+                display: inline-block;
+                margin: 0px;
+                padding: 9px;
+                position: relative;
+                border: none;
+                cursor: pointer;
+                border-radius: 3px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                font-family: 'Open Sans Bold', sans-serif;
+                line-height: 20px;
+                font-size: 12px;
+                -webkit-appearance: none;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            .leaflet-popup-content {
+                margin: 0px;
+            }
+
+            .marker-title {
+                margin-bottom: 3px;
+                text-align:center;
+                font-size: 16px;}
+
+            .marker-description{
+                text-align:center;
+            }
+
+            .leaflet-popup-content-wrapper, .map-legends, .map-tooltip {
+                background: #FFC790;
+            }
+
+            .leaflet-popup-tip{
+                border-top: 10px solid #FFC790;
+            }
         </style>
 
 
@@ -86,7 +196,7 @@
         <button onclick='zoomToHQ();' id='button'>&#9733 Zoom to HQ</button>
         <!--<div id='marker-list'><ul></ul></div>-->
         <script>
-            
+
             L.mapbox.accessToken = 'pk.eyJ1IjoiYXBwbmV4dXMiLCJhIjoiOWY4NDMzOTIxMjY3NmNlODM1ZTVhZDMyYTcwYjc5NmUifQ.rbkR3ykwuTPUX7ffI7rRVg';
             var map = L.mapbox.map('map', 'appnexus.mnh294le', {zoomControl: true, minZoom: 2});
             map.setView([15,-10], 2);
@@ -107,6 +217,19 @@
                 map.setZoom(16);
                 map.panTo(e.layer.getLatLng());
             });
+
+
+            map.featureLayer.on('ready', function(e) {
+                map.featureLayer.eachLayer(function(marker) {
+                    // You can replace this test for anything else, to choose the right
+                    // marker on which to open a popup. by default, popups are exclusive
+                    // so opening a new one will close all of the others.
+                    if (marker.feature.properties.title === 'AppNexus NYC') {
+                        marker.openPopup();
+                    }
+                });
+            });
+
 
             function zoomToWorld() {
                 map.setView([15,-10], 2);
