@@ -212,7 +212,11 @@
           };
       });
   });*/
-
+            
+            //disable zooming on scroll
+            map.scrollWheelZoom.disable();
+            
+            
             map.featureLayer.on('click', function(e) {
                 map.setZoom(16);
                 map.panTo(e.layer.getLatLng());
