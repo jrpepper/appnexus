@@ -246,7 +246,13 @@
             function zoomToHQ() {
                 map.setView([40.7418459,-73.9909744], 18);
             }
-
+            
+            // Disable drag and zoom handlers.
+            map.dragging.disable();
+            map.touchZoom.disable();
+            map.doubleClickZoom.disable();
+            map.scrollWheelZoom.disable();
+            
         </script>
     </body>
 </html>
